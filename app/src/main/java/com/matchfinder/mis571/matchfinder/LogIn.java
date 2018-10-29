@@ -19,9 +19,11 @@ public class LogIn extends AppCompatActivity {
 
 
 
-
+        //Finding the LogIn button
         Button logInBtn = (Button) findViewById(R.id.logInBtn);
 
+
+        //Creating event for clicking the Login button
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,8 +32,18 @@ public class LogIn extends AppCompatActivity {
 
                 String UserNameCarrier = emailEditText.getText().toString();
 
+                //Saving the User name in global variable UserName
                 Globals g = Globals.getInstance();
                 g.setUserName(UserNameCarrier);
+
+
+
+
+                //TESTING
+                TextView textView1 = (TextView) findViewById(R.id.textView1);
+                textView1.setText(g.getUserName());
+
+
             }
         });
 
