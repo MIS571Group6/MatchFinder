@@ -2,7 +2,9 @@ package com.matchfinder.mis571.matchfinder;
 
 import android.app.Application;
 
-public class Globals extends Application {
+public class Globals {
+    private static Globals instance;
+
 
     //Global variable
     private String UserName;
@@ -10,10 +12,13 @@ public class Globals extends Application {
     //Restrict the constructor from being instantiated
     private Globals(){}
 
+
+    //Method to set the UserName
     public void setUserName(String d){
         this.UserName=d;
     }
 
+    //Method to get the UserName
     public String getUserName(){
         return this.UserName;
     }
