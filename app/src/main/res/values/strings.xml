@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MatchFinder</string>
+
+
+    //LogIn Strings
+
+    <string name="LogInBtn">Log In</string>
+    <string name="logInEmail">Email address:</string>
+    <string name="logInPassword">Password:</string>
+
 </resources>
