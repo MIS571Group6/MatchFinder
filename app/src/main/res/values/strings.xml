@@ -5,7 +5,7 @@
     //LogIn Strings
 
     <string name="LogInBtn">Log In</string>
-    <string name="logInEmail">Email address:</string>
-    <string name="logInPassword">Password:</string>
+    <string name="logInEmail">Email address</string>
+    <string name="logInPassword">Password</string>
 
 </resources>
