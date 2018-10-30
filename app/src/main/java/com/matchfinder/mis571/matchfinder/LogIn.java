@@ -1,5 +1,6 @@
 package com.matchfinder.mis571.matchfinder;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,20 +63,16 @@ public class LogIn extends AppCompatActivity {
                     passwordChecker="EMPTY";
                 }
 
-                //Toast indicates if pw is correct or not
+                //Check if pw is correct or not. If correct, link to welcome page
                 if(passwordChecker.equals(passwordEditText.getText().toString())) {
                     Toast.makeText(getApplicationContext(),"Password correct", Toast.LENGTH_LONG).show();
+                    Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
+                    startActivity(startIntent);
+
                 }else {
                     Toast.makeText(getApplicationContext(),"Password or Nick Name not correct", Toast.LENGTH_LONG).show();
                 }
-
-
-
             }
-
-
         });
-
-
     }
 }
