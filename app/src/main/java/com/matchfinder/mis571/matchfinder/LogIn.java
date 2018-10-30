@@ -1,14 +1,16 @@
 package com.matchfinder.mis571.matchfinder;
 
-import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.matchfinder.mis571.matchfinder.constant.SQLCommand;
+import com.matchfinder.mis571.matchfinder.util.DBOperator;
 
 public class LogIn extends AppCompatActivity {
 
@@ -27,10 +29,11 @@ public class LogIn extends AppCompatActivity {
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText emailEditText = (EditText) findViewById(R.id.emailEditText);
+                EditText userNameEditText = (EditText) findViewById(R.id.UserNameEditText);
                 EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
-                String UserNameCarrier = emailEditText.getText().toString();
+                String UserNameCarrier = userNameEditText.getText().toString();
+
 
                 //Saving the User name in global variable UserName
                 Globals g = Globals.getInstance();
@@ -39,12 +42,38 @@ public class LogIn extends AppCompatActivity {
 
 
 
-                //TESTING
-                TextView textView1 = (TextView) findViewById(R.id.textView1);
-                textView1.setText(g.getUserName());
+                //copy database file
+                try{
+                    DBOperator.copyDB(getBaseContext());
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+                //find the corresponding password for the provided user name
+                Cursor cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_NAME + "'" + UserNameCarrier + "'");
+
+
+
+                //passwordChecker holds the password for the provided user name
+                String passwordChecker;
+                if (cursor.moveToFirst()) {
+                    passwordChecker = cursor.getString(cursor.getColumnIndex("UserPassword"));
+                }else{
+                    passwordChecker="EMPTY";
+                }
+
+                //Toast indicates if pw is correct or not
+                if(passwordChecker.equals(passwordEditText.getText().toString())) {
+                    Toast.makeText(getApplicationContext(),"Password correct", Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getApplicationContext(),"Password or Nick Name not correct", Toast.LENGTH_LONG).show();
+                }
+
 
 
             }
+
+
         });
 
 
