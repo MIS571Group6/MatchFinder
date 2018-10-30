@@ -20,11 +20,12 @@
         tools:text="@string/offeredMatches" />
 
     <ListView
+        android:id="@+id/offeredMatchesList"
         android:layout_width="359dp"
         android:layout_height="319dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:scrollbars="vertical"
@@ -33,19 +34,21 @@
         app:layout_constraintTop_toBottomOf="@+id/offeredMatchesFilter" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/offeredMatchesCreateNewOffer"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/welcomeCreateOffer"
         android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_dynamic" />
+        app:layout_constraintTop_toBottomOf="@+id/offeredMatchesList" />
 
     <Spinner
         android:id="@+id/offeredMatchesFilter"
@@ -56,8 +59,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />

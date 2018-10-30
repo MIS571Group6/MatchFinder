@@ -74,5 +74,23 @@ public class LogIn extends AppCompatActivity {
                 }
             }
         });
+
+
+        //Event for clicking button for creating new account
+        Button createAccBtn = (Button) findViewById(R.id.createAccBtn);
+        createAccBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent startIntent = new Intent(getApplicationContext(), SignUp.class);
+                startActivity(startIntent);
+            }
+        });
+
+
+        }
+
+
     }
-}
+
+

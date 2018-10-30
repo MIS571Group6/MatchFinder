@@ -7,7 +7,7 @@
     tools:context=".SignUp">
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/signUpMajor"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -17,10 +17,10 @@
         android:hint="Major"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpNName" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/signUpPhone"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -30,10 +30,10 @@
         android:hint="Phone Number"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpMajor" />
 
     <EditText
-        android:id="@+id/editText12"
+        android:id="@+id/signUpSecQuest"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -43,7 +43,7 @@
         android:hint="What is your grandmother's name?"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText10" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpPwA" />
 
     <TextView
         android:id="@+id/textView16"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/signUpFName"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/signUpLName"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -81,11 +81,11 @@
         android:hint="Last Name"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpFName" />
 
     <EditText
-        android:id="@+id/editText6"
-        android:layout_width="350dp"
+        android:id="@+id/signUpNName"
+        android:layout_width="170dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
@@ -94,11 +94,24 @@
         android:hint="Nick Name"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpLName" />
 
     <EditText
-        android:id="@+id/editText10"
-        android:layout_width="170"
+        android:id="@+id/signUpBDate"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Birth Date"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/signUpNName"
+        app:layout_constraintTop_toBottomOf="@+id/signUpLName" />
+
+    <EditText
+        android:id="@+id/signUpPwA"
+        android:layout_width="170dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
@@ -107,11 +120,11 @@
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText8" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpPhone" />
 
     <EditText
-        android:id="@+id/editText13"
-        android:layout_width="170"
+        android:id="@+id/signUpPwB"
+        android:layout_width="170dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
@@ -119,11 +132,11 @@
         android:ems="10"
         android:hint="Repeat Password"
         android:inputType="textPassword"
-        app:layout_constraintStart_toEndOf="@+id/editText10"
-        app:layout_constraintTop_toBottomOf="@+id/editText8" />
+        app:layout_constraintStart_toEndOf="@+id/signUpPwA"
+        app:layout_constraintTop_toBottomOf="@+id/signUpPhone" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/signUpBtn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -137,5 +150,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText12" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpSecQuest" />
 </android.support.constraint.ConstraintLayout>
