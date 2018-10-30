@@ -20,7 +20,8 @@
         <activity android:name=".OfferedMatches" />
         <activity android:name=".DetailViewOffer" />
         <activity android:name=".CreateOffer" />
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Profile" />
+        <activity android:name=".SignUp"></activity>
     </application>
 
 </manifest>

@@ -33,4 +33,18 @@
     <string name="createNewOfferDate">Date</string>
     <string name="CreateNewOfferTime">Time</string>
 
+
+
+    //Profile Strings
+    <string name="profileTopThree">Top three sports</string>
+
+
+
+    //SignUp Strings
+    <string name="signUpTitle">Sign Up</string>
+
+
+
+
+
 </resources>
