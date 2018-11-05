@@ -3,35 +3,37 @@ package com.matchfinder.mis571.matchfinder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.matchfinder.mis571.matchfinder.constant.SQLCommand;
+import com.matchfinder.mis571.matchfinder.util.DBOperator;
+
+
+
+
 public class SignUp extends AppCompatActivity {
+
+    //Declaring string variables for user information
+    String signUpFName ="default";
+    String signUpLName="default";
+    String signUpNName="default";
+    String signUpMajor="default";
+    String signUpGender="default";
+    String signUpBDate="1900-01-01";
+    String signUpPhone="default";
+    String signUpPwA="default";
+    String signUpPwB="default";
+    String signUpSecQuest="default";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-
-        final EditText signUpFName = (EditText) findViewById(R.id.signUpFName);
-        final EditText signUpLName = (EditText) findViewById(R.id.signUpLName);
-        final EditText signUpNName = (EditText) findViewById(R.id.signUpNName);
-
-        final EditText signUpMajor = (EditText) findViewById(R.id.signUpMajor);
-        final EditText signUpBDate = (EditText) findViewById(R.id.signUpBDate);
-        final EditText signUpPhone = (EditText) findViewById(R.id.signUpPhone);
-
-        final EditText signUpPwA = (EditText) findViewById(R.id.signUpPwA);
-        final EditText signUpPwB = (EditText) findViewById(R.id.signUpPwB);
-        final EditText signUpSecQuest = (EditText) findViewById(R.id.signUpSecQuest);
-
-
-
-
-
 
 
         //Creating event for clicking Button signUpBtn
@@ -43,19 +45,41 @@ public class SignUp extends AppCompatActivity {
 
                 //Checks if all fields are filled out and if passwords are identical
                 //NEED TO ADD: NICKNAME = UNIQUE?
-                //NEED TO ADD: INSERT DATA IN DB
 
-                if (!(signUpFName.getText().toString().equals("")) && !(signUpLName.getText().toString().equals("")) && !(signUpNName.getText().toString().equals("")) && !(signUpMajor.getText().toString().equals("")) && !(signUpBDate.getText().toString().equals("")) && !(signUpFName.getText().toString().equals("")) && !(signUpPhone.getText().toString().equals("")) && !(signUpPwA.getText().toString().equals("")) && !(signUpPwB.getText().toString().equals("")) && !(signUpSecQuest.getText().toString().equals("")) && signUpPwA.getText().toString().equals(signUpPwB.getText().toString())){
+
+                //Running method for updating string variables
+                getValues();
+
+
+
+                if (!(signUpFName.equals("")) && !(signUpLName.equals("")) && !(signUpNName.equals("")) && !(signUpMajor.equals("")) && !(signUpBDate.equals("")) && !(signUpFName.equals("")) && !(signUpPhone.equals("")) && !(signUpPwA.equals("")) && !(signUpPwB.equals("")) && !(signUpSecQuest.equals("")) && signUpPwA.equals(signUpPwB)){
+
+                    // Log for Testing purposes
+                    Log.d("Info","test");
+
+                    //Inserting the user input to the database
+                    DBOperator.getInstance().getInstance().execSQL(SQLCommand.NEW_USER, getArgs());
+                    Toast.makeText(getBaseContext(), "Signed up successfully",Toast.LENGTH_SHORT).show();
+
+
 
                     //Link to Welcome
                     Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
                     startActivity(startIntent);
 
 
-                }else if(!(signUpPwA.getText().toString().equals(signUpPwB.getText().toString()))){
-                    Toast.makeText(getApplicationContext(),"Passwords not identical", Toast.LENGTH_LONG).show();
-                    signUpPwA.setText("");
-                    signUpPwB.setText("");
+                    //Saving the User name in global variable UserNickName
+                    Globals g = Globals.getInstance();
+                    g.setUserNickName(signUpNName);
+
+
+                }else if(!(signUpFName.equals("")) && !(signUpLName.equals("")) && !(signUpNName.equals("")) && !(signUpMajor.equals("")) && !(signUpBDate.equals("")) && !(signUpFName.equals("")) && !(signUpPhone.equals("")) && !(signUpPwA.equals("")) && !(signUpPwB.equals("")) && !(signUpSecQuest.equals(""))&& !(signUpPwA.equals(signUpPwB))){
+                    //Toast.makeText(getApplicationContext(),"Passwords not identical", Toast.LENGTH_LONG).show();
+
+                    EditText signUpPwA2 = (EditText) findViewById(R.id.signUpPwA);
+                    EditText signUpPwB2= (EditText) findViewById(R.id.signUpPwB);
+                    signUpPwA2.setText("");
+                    signUpPwB2.setText("");
 
                 }else{
                     Toast.makeText(getApplicationContext(),"Please fill out all fields", Toast.LENGTH_LONG).show();
@@ -67,4 +91,62 @@ public class SignUp extends AppCompatActivity {
 
 
     }
+
+//Method for updating string variables based on user input
+private void getValues(){
+
+    EditText txtField_signUpFName = (EditText)findViewById(R.id.signUpFName);
+    signUpFName = txtField_signUpFName.getText().toString();
+
+    EditText txtField_signUpLName = (EditText)findViewById(R.id.signUpLName);
+    signUpLName = txtField_signUpLName.getText().toString();
+
+    EditText txtField_signUpNName = (EditText)findViewById(R.id.signUpNName);
+    signUpNName = txtField_signUpNName.getText().toString();
+
+    EditText txtField_signUpMajor = (EditText) findViewById(R.id.signUpMajor);
+    signUpMajor = txtField_signUpMajor.getText().toString();
+
+    EditText txtField_signUpGender= (EditText) findViewById(R.id.signUpGender);
+    signUpGender = txtField_signUpGender.getText().toString();
+
+    EditText txtField_signUpBDate = (EditText) findViewById(R.id.signUpBDate);
+    signUpBDate=txtField_signUpBDate.getText().toString();
+
+    EditText txtField_signUpPhone = (EditText) findViewById(R.id.signUpPhone);
+    signUpPhone = txtField_signUpPhone.getText().toString();
+
+    EditText txtField_signUpPwA = (EditText) findViewById(R.id.signUpPwA);
+     signUpPwA = txtField_signUpPwA.getText().toString();
+
+    EditText txtField_signUpPwB = (EditText) findViewById(R.id.signUpPwB);
+    signUpPwB = txtField_signUpPwB.getText().toString();
+
+    EditText txtField_signUpSecQuest = (EditText) findViewById(R.id.signUpSecQuest);
+     signUpSecQuest = txtField_signUpSecQuest.getText().toString();
+    }
+
+
+
+//string array for inserting info in UserInfo table
+    private String[] getArgs(){
+        String args[]= new String[9];
+
+        getValues();
+        args[0]=signUpFName;
+        args[1]=signUpLName;
+        args[2]=signUpNName;
+        args[3]=signUpGender;
+        args[4]=signUpBDate;
+        args[5]=signUpMajor;
+        args[6]=signUpPhone;
+        args[7]=signUpPwA;
+        args[8]=signUpSecQuest;
+
+        return args;
+    }
+
+
 }
+
+

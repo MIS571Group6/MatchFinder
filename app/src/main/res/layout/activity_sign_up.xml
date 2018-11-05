@@ -8,7 +8,7 @@
 
     <EditText
         android:id="@+id/signUpMajor"
-        android:layout_width="350dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
@@ -104,7 +104,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Birth Date"
+        android:hint="Birth Date (YYYY-MM-DD)"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/signUpNName"
         app:layout_constraintTop_toBottomOf="@+id/signUpLName" />
@@ -151,4 +151,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpSecQuest" />
+
+    <EditText
+        android:id="@+id/signUpGender"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/signUpGender"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/signUpMajor"
+        app:layout_constraintTop_toBottomOf="@+id/signUpBDate" />
 </android.support.constraint.ConstraintLayout>

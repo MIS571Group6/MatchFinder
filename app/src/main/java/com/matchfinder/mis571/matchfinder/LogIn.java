@@ -36,9 +36,9 @@ public class LogIn extends AppCompatActivity {
                 String UserNameCarrier = userNameEditText.getText().toString();
 
 
-                //Saving the User name in global variable UserName
+                //Saving the User name in global variable UserNickName
                 Globals g = Globals.getInstance();
-                g.setUserName(UserNameCarrier);
+                g.setUserNickName(UserNameCarrier);
 
 
 

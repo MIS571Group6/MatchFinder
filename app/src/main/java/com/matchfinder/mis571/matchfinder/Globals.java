@@ -7,20 +7,20 @@ public class Globals {
 
 
     //Global variable
-    private String UserName;
+    private String UserNickName;
 
     //Restrict the constructor from being instantiated
     private Globals(){}
 
 
-    //Method to set the UserName
-    public void setUserName(String d){
-        this.UserName=d;
+    //Method to set the UserNickName
+    public void setUserNickName(String d){
+        this.UserNickName=d;
     }
 
-    //Method to get the UserName
-    public String getUserName(){
-        return this.UserName;
+    //Method to get the UserNickName
+    public String getUserNickName(){
+        return this.UserNickName;
     }
 
     public static synchronized Globals getInstance(){
@@ -32,12 +32,13 @@ public class Globals {
 }
 
 
+
+
+
 //FOR GETTING OR SETTING THIS VARIABLE
 
 //Globals g = Globals.getInstance();
-//g.setData(100);
+//g.setUserNickName(............);
 //
 //....
-//int data=g.getData();
-
-//Test
+//int data=g.getUserNickName();

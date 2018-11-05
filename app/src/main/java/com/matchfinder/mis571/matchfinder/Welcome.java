@@ -18,8 +18,8 @@ public class Welcome extends AppCompatActivity {
         //Adjusting the displayed name
         TextView textViewWelcomeName = (TextView) findViewById(R.id.textViewWelcomeName);
         Globals g = Globals.getInstance();
-        String UserName = g.getUserName();
-        textViewWelcomeName.setText("Welcome, " + UserName);
+        String UserNickName = g.getUserNickName();
+        textViewWelcomeName.setText("Welcome, " + UserNickName);
 
 
         //Event when clicking Button welcomeShowOffers
