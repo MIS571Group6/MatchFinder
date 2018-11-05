@@ -39,3 +39,5 @@ public class Globals {
 //
 //....
 //int data=g.getData();
+
+//Test
