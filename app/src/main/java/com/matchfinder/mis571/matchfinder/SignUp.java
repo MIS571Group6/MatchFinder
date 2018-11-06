@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.matchfinder.mis571.matchfinder.constant.Globals;
 import com.matchfinder.mis571.matchfinder.constant.SQLCommand;
 import com.matchfinder.mis571.matchfinder.util.DBOperator;
 
@@ -19,16 +20,16 @@ import com.matchfinder.mis571.matchfinder.util.DBOperator;
 public class SignUp extends AppCompatActivity {
 
     //Declaring string variables for user information
-    String signUpFName ="default";
-    String signUpLName="default";
-    String signUpNName="default";
-    String signUpMajor="default";
-    String signUpGender="default";
-    String signUpBDate="1900-01-01";
-    String signUpPhone="default";
-    String signUpPwA="default";
-    String signUpPwB="default";
-    String signUpSecQuest="default";
+    String signUpFName;
+    String signUpLName;
+    String signUpNName;
+    String signUpMajor;
+    String signUpGender;
+    String signUpBDate;
+    String signUpPhone;
+    String signUpPwA;
+    String signUpPwB;
+    String signUpSecQuest;
 
 
 
@@ -44,24 +45,15 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                //Checks if all fields are filled out and if passwords are identical
-                //NEED TO ADD: NICKNAME = UNIQUE?
-
-
-                //Running method for updating string variables
+                //Running method for updating string variables from input boxes
                 getValues();
 
 
-
+                //Check if all fields are filled out, if passwords are identical and if username is unique
                 if (!(signUpFName.equals("")) && !(signUpLName.equals("")) && !(signUpNName.equals("")) && !(signUpMajor.equals("")) && !(signUpBDate.equals("")) && !(signUpFName.equals("")) && !(signUpPhone.equals("")) && !(signUpPwA.equals("")) && !(signUpPwB.equals("")) && !(signUpSecQuest.equals("")) && signUpPwA.equals(signUpPwB)){
-
-                    // Log for testing purposes
-                    Log.d("Info","test");
 
 
                     //Checking, if UserNName unique
-
 
                     //copy database file
                     try{
@@ -70,10 +62,10 @@ public class SignUp extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-
                     //counting the number of nicknames that are identical to the user input (proceed, if chosen nickname is unique)
                     Cursor cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_NICKNAME + "'" + signUpNName + "'");
 
+                    //holds the count of the given nick name in the UserInfo table
                     Integer uniqueNickNameChecker;
 
                     if (cursor.moveToFirst()) {
@@ -81,8 +73,6 @@ public class SignUp extends AppCompatActivity {
                     }else{
                         uniqueNickNameChecker=100;
                     }
-
-
 
                     if (uniqueNickNameChecker==0) {
                         //Inserting the user input to the database
@@ -93,9 +83,23 @@ public class SignUp extends AppCompatActivity {
                         Globals g = Globals.getInstance();
                         g.setUserNickName(signUpNName);
 
+
+                        //Finding out the UserID of the new user and saving it as a global variable
+                        Integer userIDCarrier;
+                        cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERID + "'" + signUpNName + "'");
+                        if (cursor.moveToFirst()) {
+                            userIDCarrier = cursor.getInt(cursor.getColumnIndex("UserID"));
+                        }else{
+                            userIDCarrier=0;
+                        }
+                        //Save ID as global variable
+                        g.setUserID(userIDCarrier);
+
+
                         //Link to Welcome
                         Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
                         startActivity(startIntent);
+
                     }else{
                         Toast.makeText(getBaseContext(), "Nick Name already taken.", Toast.LENGTH_SHORT).show();
                         EditText signUpNName2 = (EditText) findViewById(R.id.signUpNName);
@@ -118,9 +122,8 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-
-
     }
+
 
 //Method for updating string variables based on user input
 private void getValues(){

@@ -21,7 +21,7 @@
         <activity android:name=".DetailViewOffer" />
         <activity android:name=".CreateOffer" />
         <activity android:name=".Profile" />
-        <activity android:name=".SignUp"></activity>
+        <activity android:name=".SignUp" />
     </application>
 
 </manifest>
