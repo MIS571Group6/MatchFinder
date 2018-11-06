@@ -110,6 +110,24 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
+
+
+        //Event for clicking button for restoring password
+        Button forgotPwBtn = (Button) findViewById(R.id.forgotPwBtn);
+        forgotPwBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent startIntent = new Intent(getApplicationContext(), ForgotPW.class);
+                startActivity(startIntent);
+
+
+            }
+        });
+
+
+
         }
 
     }

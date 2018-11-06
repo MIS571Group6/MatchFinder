@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context=".SignUp">
 
     <EditText
@@ -14,7 +15,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Major"
+        android:hint="@string/signUpMajor"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpNName" />
@@ -27,7 +28,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Phone Number"
+        android:hint="@string/signUpPhone"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpMajor" />
@@ -40,7 +41,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="What is your grandmother's name?"
+        android:hint="@string/signUpSecQuest1"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpPwA" />
@@ -65,7 +66,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="First Name"
+        android:hint="@string/signUpFirstName"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
@@ -78,7 +79,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Last Name"
+        android:hint="@string/signUpLastName"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpFName" />
@@ -91,7 +92,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Nick Name"
+        android:hint="@string/signUpNickName"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpLName" />
@@ -104,7 +105,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Birthdate (yyyy-mm-dd)"
+        android:hint="@string/signUpBday"
         android:inputType="textPersonName"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/signUpNName"
@@ -118,7 +119,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/logInPassword"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpPhone" />
@@ -131,7 +132,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Repeat Password"
+        android:hint="@string/signUpRepeat"
         android:inputType="textPassword"
         app:layout_constraintStart_toEndOf="@+id/signUpPwA"
         app:layout_constraintTop_toBottomOf="@+id/signUpPhone" />

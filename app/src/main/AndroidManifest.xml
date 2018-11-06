@@ -22,6 +22,7 @@
         <activity android:name=".CreateOffer" />
         <activity android:name=".Profile" />
         <activity android:name=".SignUp" />
+        <activity android:name=".ForgotPW"></activity>
     </application>
 
 </manifest>

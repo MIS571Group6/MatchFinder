@@ -41,6 +41,18 @@
     //SignUp Strings
     <string name="signUpTitle">Sign Up</string>
     <string name="signUpGender">M/F</string>
+    <string name="signUpFirstName">First Name</string>
+    <string name="signUpLastName">Last Name</string>
+    <string name="signUpNickName">Nick Name</string>
+    <string name="signUpBday">Birthdate (yyyy-mm-dd)</string>
+    <string name="signUpMajor">Major</string>
+    <string name="signUpPhone">Phone</string>
+    <string name="signUpRepeat">Repeat Password</string>
+    <string name="signUpSecQuest1">What is your older grandmother\'s name?</string>
+
+    //Forgot Password Strings
+    <string name="forgotPwTitle">Restore your password</string>
+    <string name="forgotPwSubmit">Change Password</string>
 
 
 </resources>
