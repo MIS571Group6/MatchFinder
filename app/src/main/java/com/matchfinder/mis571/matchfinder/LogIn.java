@@ -42,7 +42,6 @@ public class LogIn extends AppCompatActivity {
 
 
 
-
                 //copy database file
                 try{
                     DBOperator.copyDB(getBaseContext());

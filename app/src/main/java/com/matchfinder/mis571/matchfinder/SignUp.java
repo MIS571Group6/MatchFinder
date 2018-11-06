@@ -1,6 +1,7 @@
 package com.matchfinder.mis571.matchfinder;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class SignUp extends AppCompatActivity {
     String signUpSecQuest="default";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,27 +56,55 @@ public class SignUp extends AppCompatActivity {
 
                 if (!(signUpFName.equals("")) && !(signUpLName.equals("")) && !(signUpNName.equals("")) && !(signUpMajor.equals("")) && !(signUpBDate.equals("")) && !(signUpFName.equals("")) && !(signUpPhone.equals("")) && !(signUpPwA.equals("")) && !(signUpPwB.equals("")) && !(signUpSecQuest.equals("")) && signUpPwA.equals(signUpPwB)){
 
-                    // Log for Testing purposes
+                    // Log for testing purposes
                     Log.d("Info","test");
 
-                    //Inserting the user input to the database
-                    DBOperator.getInstance().getInstance().execSQL(SQLCommand.NEW_USER, getArgs());
-                    Toast.makeText(getBaseContext(), "Signed up successfully",Toast.LENGTH_SHORT).show();
+
+                    //Checking, if UserNName unique
+
+
+                    //copy database file
+                    try{
+                        DBOperator.copyDB(getBaseContext());
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
+
+                    //counting the number of nicknames that are identical to the user input (proceed, if chosen nickname is unique)
+                    Cursor cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_NICKNAME + "'" + signUpNName + "'");
+
+                    Integer uniqueNickNameChecker;
+
+                    if (cursor.moveToFirst()) {
+                        uniqueNickNameChecker = cursor.getInt(cursor.getColumnIndex("Count"));
+                    }else{
+                        uniqueNickNameChecker=100;
+                    }
 
 
 
-                    //Link to Welcome
-                    Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
-                    startActivity(startIntent);
+                    if (uniqueNickNameChecker==0) {
+                        //Inserting the user input to the database
+                        DBOperator.getInstance().getInstance().execSQL(SQLCommand.NEW_USER, getArgs());
+                        Toast.makeText(getBaseContext(), "Signed up successfully", Toast.LENGTH_SHORT).show();
 
+                        //Saving the User name in global variable UserNickName
+                        Globals g = Globals.getInstance();
+                        g.setUserNickName(signUpNName);
 
-                    //Saving the User name in global variable UserNickName
-                    Globals g = Globals.getInstance();
-                    g.setUserNickName(signUpNName);
+                        //Link to Welcome
+                        Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
+                        startActivity(startIntent);
+                    }else{
+                        Toast.makeText(getBaseContext(), "Nick Name already taken.", Toast.LENGTH_SHORT).show();
+                        EditText signUpNName2 = (EditText) findViewById(R.id.signUpNName);
+                        signUpNName2.setText("");
+                    }
 
 
                 }else if(!(signUpFName.equals("")) && !(signUpLName.equals("")) && !(signUpNName.equals("")) && !(signUpMajor.equals("")) && !(signUpBDate.equals("")) && !(signUpFName.equals("")) && !(signUpPhone.equals("")) && !(signUpPwA.equals("")) && !(signUpPwB.equals("")) && !(signUpSecQuest.equals(""))&& !(signUpPwA.equals(signUpPwB))){
-                    //Toast.makeText(getApplicationContext(),"Passwords not identical", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Passwords not identical", Toast.LENGTH_LONG).show();
 
                     EditText signUpPwA2 = (EditText) findViewById(R.id.signUpPwA);
                     EditText signUpPwB2= (EditText) findViewById(R.id.signUpPwB);
@@ -96,34 +126,27 @@ public class SignUp extends AppCompatActivity {
 private void getValues(){
 
     EditText txtField_signUpFName = (EditText)findViewById(R.id.signUpFName);
-    signUpFName = txtField_signUpFName.getText().toString();
-
     EditText txtField_signUpLName = (EditText)findViewById(R.id.signUpLName);
-    signUpLName = txtField_signUpLName.getText().toString();
-
     EditText txtField_signUpNName = (EditText)findViewById(R.id.signUpNName);
-    signUpNName = txtField_signUpNName.getText().toString();
-
     EditText txtField_signUpMajor = (EditText) findViewById(R.id.signUpMajor);
-    signUpMajor = txtField_signUpMajor.getText().toString();
-
     EditText txtField_signUpGender= (EditText) findViewById(R.id.signUpGender);
-    signUpGender = txtField_signUpGender.getText().toString();
-
     EditText txtField_signUpBDate = (EditText) findViewById(R.id.signUpBDate);
-    signUpBDate=txtField_signUpBDate.getText().toString();
-
     EditText txtField_signUpPhone = (EditText) findViewById(R.id.signUpPhone);
-    signUpPhone = txtField_signUpPhone.getText().toString();
-
     EditText txtField_signUpPwA = (EditText) findViewById(R.id.signUpPwA);
-     signUpPwA = txtField_signUpPwA.getText().toString();
-
     EditText txtField_signUpPwB = (EditText) findViewById(R.id.signUpPwB);
-    signUpPwB = txtField_signUpPwB.getText().toString();
-
     EditText txtField_signUpSecQuest = (EditText) findViewById(R.id.signUpSecQuest);
-     signUpSecQuest = txtField_signUpSecQuest.getText().toString();
+
+    signUpFName = txtField_signUpFName.getText().toString();
+    signUpLName = txtField_signUpLName.getText().toString();
+    signUpNName = txtField_signUpNName.getText().toString();
+    signUpMajor = txtField_signUpMajor.getText().toString();
+    signUpGender = txtField_signUpGender.getText().toString();
+    signUpBDate=txtField_signUpBDate.getText().toString();
+    signUpPhone = txtField_signUpPhone.getText().toString();
+    signUpPwA = txtField_signUpPwA.getText().toString();
+    signUpPwB = txtField_signUpPwB.getText().toString();
+    signUpPwB = txtField_signUpPwB.getText().toString();
+    signUpSecQuest = txtField_signUpSecQuest.getText().toString();
     }
 
 

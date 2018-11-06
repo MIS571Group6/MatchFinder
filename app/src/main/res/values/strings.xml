@@ -42,7 +42,7 @@
 
     //SignUp Strings
     <string name="signUpTitle">Sign Up</string>
-    <string name="signUpGender">m/f</string>
+    <string name="signUpGender">M/F</string>
 
 
 </resources>

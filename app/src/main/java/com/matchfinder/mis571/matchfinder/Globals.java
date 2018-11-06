@@ -28,6 +28,13 @@ public class Globals {
             instance=new Globals();
         }
         return instance;
+
+
+
+
+
+
+
     }
 }
 

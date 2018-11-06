@@ -18,6 +18,5 @@ public abstract class SQLCommand
     //Populating the database with new user
     public static String NEW_USER = "insert into UserInfo(UserFirstName, UserLastName, UserNickName, UserGender, UserBirthDate, UserMajor, UserPhone, UserPassword, UserSecQuest) values(?,?,?,?,?,?,?,?,?)";
 
-    public static String NEW_USER2 = "insert into UserInfo(UserFirstName, UserLastName, UserNickName, UserGender, UserBirthDate, UserMajor, UserPhone, UserPassword) values(?,?,?,?,?,?,?,?)";
-
+    public static String QUERY_NICKNAME = "select Count(UserNickName) as 'Count' from UserInfo where UserNickName LIKE ";
 }
