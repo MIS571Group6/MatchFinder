@@ -21,4 +21,17 @@ public abstract class SQLCommand
     public static String NEW_USER = "insert into UserInfo(UserFirstName, UserLastName, UserNickName, UserGender, UserBirthDate, UserMajor, UserPhone, UserPassword, UserSecQuest) values(?,?,?,?,?,?,?,?,?)";
 
     public static String QUERY_NICKNAME = "select Count(UserNickName) as 'Count' from UserInfo where UserNickName LIKE ";
+
+
+    //Welcome
+    //NEEDS TO BE ADJUSTED: "NOW" INSTEAD OF '2018-11-06'
+    public static String QUERY_USERMATCHES = "SELECT Matches.MatchesID, Sport.SportName, strftime('%H:%M:%S', Matches.MatchesPlannedDate) as 'Time' \n" +
+            "FROM Matches \n" +
+            "inner join sport on matches.sportid=sport.sportid \n" +
+            "INNER JOIN USERMATCH on matches.matchesid = usermatch.matchesid \n" +
+            "WHERE JulianDay(date(matches.matchesplanneddate))=Julianday(date('2018-11-06')) \n" +
+            "AND usermatch.userID =";
+
+
+
 }
