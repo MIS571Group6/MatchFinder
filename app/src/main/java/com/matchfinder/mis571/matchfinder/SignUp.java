@@ -15,8 +15,6 @@ import com.matchfinder.mis571.matchfinder.constant.SQLCommand;
 import com.matchfinder.mis571.matchfinder.util.DBOperator;
 
 
-
-
 public class SignUp extends AppCompatActivity {
 
     //Declaring string variables for user information
@@ -32,15 +30,14 @@ public class SignUp extends AppCompatActivity {
     String signUpSecQuest;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
         //Creating event for clicking Button signUpBtn
         Button signUpBtn = (Button) findViewById(R.id.signUpBtn);
+
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +48,6 @@ public class SignUp extends AppCompatActivity {
 
                 //Check if all fields are filled out, if passwords are identical and if username is unique
                 if (!(signUpFName.equals("")) && !(signUpLName.equals("")) && !(signUpNName.equals("")) && !(signUpMajor.equals("")) && !(signUpBDate.equals("")) && !(signUpFName.equals("")) && !(signUpPhone.equals("")) && !(signUpPwA.equals("")) && !(signUpPwB.equals("")) && !(signUpSecQuest.equals("")) && signUpPwA.equals(signUpPwB)){
-
 
                     //Checking, if UserNName unique
 
@@ -77,12 +73,12 @@ public class SignUp extends AppCompatActivity {
                     if (uniqueNickNameChecker==0) {
                         //Inserting the user input to the database
                         DBOperator.getInstance().getInstance().execSQL(SQLCommand.NEW_USER, getArgs());
+
                         Toast.makeText(getBaseContext(), "Signed up successfully", Toast.LENGTH_SHORT).show();
 
                         //Saving the User name in global variable UserNickName
                         Globals g = Globals.getInstance();
                         g.setUserNickName(signUpNName);
-
 
                         //Finding out the UserID of the new user and saving it as a global variable
                         Integer userIDCarrier;
@@ -95,7 +91,6 @@ public class SignUp extends AppCompatActivity {
                         //Save ID as global variable
                         g.setUserID(userIDCarrier);
 
-
                         //Link to Welcome
                         Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
                         startActivity(startIntent);
@@ -105,7 +100,6 @@ public class SignUp extends AppCompatActivity {
                         EditText signUpNName2 = (EditText) findViewById(R.id.signUpNName);
                         signUpNName2.setText("");
                     }
-
 
                 }else if(!(signUpFName.equals("")) && !(signUpLName.equals("")) && !(signUpNName.equals("")) && !(signUpMajor.equals("")) && !(signUpBDate.equals("")) && !(signUpFName.equals("")) && !(signUpPhone.equals("")) && !(signUpPwA.equals("")) && !(signUpPwB.equals("")) && !(signUpSecQuest.equals(""))&& !(signUpPwA.equals(signUpPwB))){
                     Toast.makeText(getApplicationContext(),"Passwords not identical", Toast.LENGTH_LONG).show();
@@ -171,8 +165,6 @@ private void getValues(){
 
         return args;
     }
-
-
 }
 
 

@@ -27,7 +27,6 @@ public class LogIn extends AppCompatActivity {
         //Finding the LogIn button
         Button logInBtn = (Button) findViewById(R.id.logInBtn);
 
-
         //Creating event for clicking the Login button
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,11 +35,8 @@ public class LogIn extends AppCompatActivity {
                 EditText userNameEditText = (EditText) findViewById(R.id.UserNameEditText);
                 EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
-
                 //String UserNameCarrier holds the Nickname from user input
                 String UserNameCarrier = userNameEditText.getText().toString();
-
-
 
                 //copy database file
                 try{
@@ -62,7 +58,6 @@ public class LogIn extends AppCompatActivity {
                     passwordChecker="EMPTY";
                 }
 
-
                 //variable holds the UserID for the given Nick name
                 Integer userIDCarrier;
 
@@ -73,7 +68,6 @@ public class LogIn extends AppCompatActivity {
                 }else{
                     userIDCarrier=0;
                 }
-
 
                 //Check if pw is correct or not. If correct, save nickname and userID as global variables and link to welcome page
                 if(passwordChecker.equals(passwordEditText.getText().toString())) {
@@ -86,18 +80,16 @@ public class LogIn extends AppCompatActivity {
                     //Saving the UserID in global variable
                     g.setUserID(userIDCarrier);
 
-
                     //Opening new page
                     Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
                     startActivity(startIntent);
 
-
                 }else {
                     Toast.makeText(getApplicationContext(),"Password or Nick Name not correct", Toast.LENGTH_SHORT).show();
+                    passwordEditText.setText("");
                 }
             }
         });
-
 
         //Event for clicking button for creating new account
         Button createAccBtn = (Button) findViewById(R.id.createAccBtn);
@@ -110,26 +102,17 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
-
-
         //Event for clicking button for restoring password
         Button forgotPwBtn = (Button) findViewById(R.id.forgotPwBtn);
         forgotPwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 Intent startIntent = new Intent(getApplicationContext(), ForgotPW.class);
                 startActivity(startIntent);
-
-
             }
         });
-
-
-
         }
-
     }
 
 

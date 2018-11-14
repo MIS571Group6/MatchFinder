@@ -3,40 +3,36 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/matchTextView"
+        android:id="@+id/userNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
         android:layout_marginTop="11dp"
-        android:text="Match"
+        android:text="TextView"
         android:textSize="28sp" />
 
     <TextView
-        android:id="@+id/matchIDTextView"
+        android:id="@+id/skillTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/matchTextView"
-        android:layout_alignStart="@+id/matchTextView"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:text="MatchID"
-        android:textColor="@color/colorPrimaryLight"
-        android:textSize="5sp" />
-
-    <TextView
-        android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/matchTextView"
+        android:layout_alignBottom="@+id/userNameTextView"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="37dp"
+        android:layout_marginEnd="53dp"
         android:layout_marginRight="37dp"
-        android:layout_marginBottom="0dp"
-        android:text="Time"
+        android:text="TextView"
         android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/userIDTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userNameTextView"
+        android:layout_alignStart="@+id/userNameTextView"
+        android:text="TextView"
+        android:textColor="@color/colorPrimaryLight"
+        android:textSize="5sp" />
 </RelativeLayout>

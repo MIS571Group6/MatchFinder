@@ -1,4 +1,4 @@
-package com.matchfinder.mis571.matchfinder;
+package com.matchfinder.mis571.matchfinder.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -58,6 +58,15 @@ public class WelcomeAdapter extends BaseAdapter {
         matchIDTextView.setText(matchesID);
 
         return v;
+    }
+
+
+
+    public String getMatchID(int i){
+
+        String MatchID = matchesIDs[i];
+
+        return MatchID;
     }
 
 
