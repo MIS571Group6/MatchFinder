@@ -20,7 +20,7 @@ public abstract class SQLCommand
     //Populating the database with new user
     public static String NEW_USER = "insert into UserInfo(UserFirstName, UserLastName, UserNickName, UserGender, UserBirthDate, UserMajor, UserPhone, UserPassword, UserSecQuest) values(?,?,?,?,?,?,?,?,?)";
 
-    public static String QUERY_NICKNAME = "select Count(UserNickName) as 'Count' from UserInfo where UserNickName LIKE ";
+    public static String QUERY_NICKNAMECOUNT = "select Count(UserNickName) as 'Count' from UserInfo where UserNickName LIKE ";
 
 
     //WELCOME
@@ -44,4 +44,8 @@ public abstract class SQLCommand
     //query to find out all users that are participating at a specific match and their skills
     public static String QUERY_USERS = "Select UserMatch.UserID as 'UserID', UserInfo.UserNickName as 'NickName', Skill.Skillgroup as 'Skill' from UserMatch Inner Join UserInfo on UserMatch.UserID = UserInfo.UserID Inner Join Skill on UserMatch.UserID = Skill.UserID Inner Join Matches on UserMatch.MatchesID = Matches.MatchesID Where (Skill.SportID = Matches.SportID OR skill.sportID is Null) and UserMatch.MatchesID LIKE";
 
+
+
+    //query to find out nickname for certain userID
+    public static String QUERY_NICKNAME = "select UserNickname as 'NickName', UserMajor as 'Major', UserPhone as 'Phone', (strftime('%Y', 'now') - strftime('%Y', UserBirthDate)) - (strftime('%m-%d', 'now') < strftime('%m-%d', UserBirthDate)) as 'Age', UserGender as 'Gender' from UserInfo where UserID = ";
 }

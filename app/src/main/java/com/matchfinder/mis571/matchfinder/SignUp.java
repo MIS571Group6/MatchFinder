@@ -59,7 +59,7 @@ public class SignUp extends AppCompatActivity {
                     }
 
                     //counting the number of nicknames that are identical to the user input (proceed, if chosen nickname is unique)
-                    Cursor cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_NICKNAME + "'" + signUpNName + "'");
+                    Cursor cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_NICKNAMECOUNT + "'" + signUpNName + "'");
 
                     //holds the count of the given nick name in the UserInfo table
                     Integer uniqueNickNameChecker;

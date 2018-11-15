@@ -1,8 +1,11 @@
 package com.matchfinder.mis571.matchfinder;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -97,10 +100,24 @@ public class DetailView extends AppCompatActivity {
         final DetailViewAdapter DetailViewAdapter = new DetailViewAdapter(this, UserName.getArray(cursor, "NickName"), UserSkill.getArray(cursor, "Skill"), UserID.getArray(cursor, "UserID"));
         detailListView.setAdapter(DetailViewAdapter);
 
+            // Skill still must be translated in clear text
+
+        //Event when clicking a certain item of the listview. The corresponding Profile will be shown
+        detailListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+
+                //Get and pass the matchesID of the clicked item
+                Intent showDetail = new Intent(getApplicationContext(), Profile.class);
+                //Calling a method in detailAdapter class that returns the UsersID
+                String clickedUser = DetailViewAdapter.getUserID(i);
 
 
-        //Event when clicking a certain item of the listview
-
+                //Passing the info to the detailView page
+                showDetail.putExtra("com.matchfinder.mis571.matchfinder.USER_ID",clickedUser);
+                startActivity(showDetail);
+            }
+        });
 
 
 
