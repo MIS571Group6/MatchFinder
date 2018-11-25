@@ -24,17 +24,16 @@ public abstract class SQLCommand
 
 
     //WELCOME
-    //NEEDS TO BE ADJUSTED: "NOW" INSTEAD OF '2018-11-06'
+    //query to find all matches the current user is signed up for (and that are not done yet)
     public static String QUERY_USERMATCHES = "SELECT Matches.MatchesID as 'MatchesID', Sport.SportName as 'SportName', strftime('%H:%M:%S', Matches.MatchesPlannedDate) as 'Time' \n" +
             "FROM Matches \n" +
             "inner join sport on matches.sportid=sport.sportid \n" +
             "INNER JOIN USERMATCH on matches.matchesid = usermatch.matchesid \n" +
-            "WHERE JulianDay(date(matches.matchesplanneddate))=Julianday(date('2018-11-06')) \n" +
-            "AND usermatch.userID =";
+            "WHERE Matches.MatchesDone LIKE 'N' and usermatch.userID =";
 
 
     // DETAIL VIEW
-    // query to find out the sportname for a certain matchesID
+    // query to find info on certain matches
     public static String QUERY_OFFERDETAILS = "Select matches.matchesPlayerCount as 'PCount', strftime('%m-%d-%Y',matches.matchesCreationDate) as 'CreationDate', strftime('%m-%d-%Y',matches.matchesplanneddate) as 'PlannedDate', matches.matchesplannedplace as 'Location', sport.sportname as 'sportname', strftime('%H:%M:%S', Matches.MatchesPlannedDate) as 'PlannedTime' from matches inner join Sport on matches.sportid = Sport.sportid where matchesID LIKE";
 
     //query to find out the average skill level of a match (split to place a variable string in between)
@@ -42,10 +41,15 @@ public abstract class SQLCommand
     public static String QUERY_AVGSKILL_2 = "and Skill.SportID = Matches.SportID Group by UserMatch.MatchesID";
 
     //query to find out all users that are participating at a specific match and their skills
-    public static String QUERY_USERS = "Select UserMatch.UserID as 'UserID', UserInfo.UserNickName as 'NickName', Skill.Skillgroup as 'Skill' from UserMatch Inner Join UserInfo on UserMatch.UserID = UserInfo.UserID Inner Join Skill on UserMatch.UserID = Skill.UserID Inner Join Matches on UserMatch.MatchesID = Matches.MatchesID Where (Skill.SportID = Matches.SportID OR skill.sportID is Null) and UserMatch.MatchesID LIKE";
+    public static String QUERY_USERS1 = "Select UserMatch.MatchesID as 'MatchesID', UserMatch.UserID as 'UserID', UserInfo.UserNickName as 'UserNickName', Skill.SkillGroup as 'SkillGroup' From UserMatch  Left Join UserInfo On UserMatch.UserID = UserInfo.UserID Left Join Skill On UserMatch.UserID = Skill.UserID Where Skill.SportID IN ((Select Matches.SportID from Matches Where Matches.MatchesID = ";
+    public static String QUERY_USERS2=" ), NULL) AND UserMatch.MatchesID = ";
 
-    //query to find out if current user is participating in a certain match --> COULD BE ORDERED BY SKILLGROUP DESC
-    public static String QUERY_USERSKILLS = "Select Sport.SportName as 'SportName', Skill.SkillGroup as 'SkillGroup' from Sport left Join Skill on sport.SportID = Skill.SportID where Skill.UserID LIKE ";
+
+
+    //code to sign up for a match
+    public static String NEW_MATCH = "insert into UserMatch(MatchesID, UserID, MatchUserID) values(?,?,?)";
+
+    //code to sign out of a match
 
 
 
@@ -54,6 +58,8 @@ public abstract class SQLCommand
     //query to find out Details for certain userID
     public static String QUERY_NICKNAME = "select UserNickname as 'NickName', UserMajor as 'Major', UserPhone as 'Phone', (strftime('%Y', 'now') - strftime('%Y', UserBirthDate)) - (strftime('%m-%d', 'now') < strftime('%m-%d', UserBirthDate)) as 'Age', UserGender as 'Gender' from UserInfo where UserID = ";
 
+    //query to find all skills of a user
+    public static String QUERY_USERSKILLS = "Select Sport.SportName as 'SportName', Skill.SkillGroup as 'SkillGroup' from Sport left Join Skill on sport.SportID = Skill.SportID where Skill.UserID LIKE ";
 
 
     //OFFERED MATCHES

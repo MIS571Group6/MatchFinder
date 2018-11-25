@@ -34,7 +34,7 @@ public class Welcome extends AppCompatActivity {
 
         welcomeListView = (ListView) findViewById(R.id.welcomeListView);
 
-        //create objects from CursorToArrayClass
+        //create objects from Methods class
         Methods sportName = new Methods();
         Methods time = new Methods();
         Methods matchesID = new Methods();
@@ -63,6 +63,8 @@ public class Welcome extends AppCompatActivity {
             }
         });
 
+
+
         //Event when clicking Button welcomeShowOffers
         Button welcomeShowOffers = (Button) findViewById(R.id.welcomeShowOffers);
         welcomeShowOffers.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +76,8 @@ public class Welcome extends AppCompatActivity {
                 startActivity(startIntent);
             }
         });
+
+
 
         //Event when clicking Button welcomeCreateOffer
         Button welcomeCreateOffer = (Button) findViewById(R.id.welcomeCreateOffer);
@@ -87,7 +91,33 @@ public class Welcome extends AppCompatActivity {
             }
         });
 
+
+
+        //Event when clicking Button welcomeToProfile
+        Button welcomeToProfile = (Button) findViewById(R.id.welcomeToProfile);
+        welcomeToProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+              //Linking to profile page
+                Intent showProfile = new Intent(getApplicationContext(), Profile.class);
+
+                String userID = g.getUserID().toString();
+                //passing over the current user's UserID
+
+                showProfile.putExtra("com.matchfinder.mis571.matchfinder.USER_ID",userID);
+                startActivity(showProfile);
+            }
+        });
+
+
+
+
+
+
+
     }
+
 
 
 

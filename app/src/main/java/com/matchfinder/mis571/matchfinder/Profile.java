@@ -50,7 +50,7 @@ public class Profile extends AppCompatActivity {
         TextView userMajorTextView = (TextView) findViewById(R.id.userMajorTextView);
         TextView userAgeTextView = (TextView) findViewById(R.id.userAgeTextView);
         TextView userPhoneTextView =(TextView) findViewById(R.id.userPhoneTextView);
-        //MAYBE ADD GENDER
+
 
         Methods userInfo = new Methods();
 
@@ -65,14 +65,11 @@ public class Profile extends AppCompatActivity {
         //Fill ListView with Information on skills of the user
 
         ListView SportsListView = (ListView) findViewById(R.id.SportsListView);
-
-
+        //Query to gather information needed
         Cursor cursor2 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERSKILLS + "'" + clickedUser + "'");
-
         Methods skill= new Methods();
-
+        //Setting up adapter for filling ListView
         final ProfileSkillsAdapter profileSkillsAdapter = new ProfileSkillsAdapter(this, skill.getArray(cursor2, "SportName"), skill.getSkillStringArray(cursor2, "SkillGroup"));
-
         SportsListView.setAdapter(profileSkillsAdapter);
 
 
