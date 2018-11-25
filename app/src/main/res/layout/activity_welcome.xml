@@ -14,7 +14,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="40dp"
-        android:text="@string/welcomeMatchesToday"
+        android:text="@string/welcomeMatches"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWelcomeName" />
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/welcomeHistory"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="@+id/welcomeCreateOffer"
         app:layout_constraintTop_toBottomOf="@+id/welcomeCreateOffer" />
 
