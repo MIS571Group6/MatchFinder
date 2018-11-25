@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,13 +38,30 @@ public class OfferedMatches extends AppCompatActivity {
         Methods matchesID = new Methods();
 
 
-
+        //Filling the ListView with information
         final OfferedMatchesAdapter offeredMatchesAdapter = new OfferedMatchesAdapter(this, sportName.getArray(cursor,"SportName"), date.getArray(cursor, "PlannedDate"), matchesID.getArray(cursor,"MatchesID"), playerCount.getArray(cursor, "PlayerCount"));
         offeredMatchesListView.setAdapter(offeredMatchesAdapter);
 
 
 
 
+
+
+        //Create Event for clicking certain items of the ListView and opening the corresponding DetailView
+        offeredMatchesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+
+                //Get and pass the matchesID of the clicked item
+                Intent showDetail = new Intent(getApplicationContext(), DetailView.class);
+                //Calling a method in offeredMatchesAdapter class that returns the MatchesID
+                String clickedMatch = offeredMatchesAdapter.getMatchID(i);
+
+                //Passing the info to the detailView page
+                showDetail.putExtra("com.matchfinder.mis571.matchfinder.MATCH_ID",clickedMatch);
+                startActivity(showDetail);
+            }
+        });
 
 
 

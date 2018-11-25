@@ -88,7 +88,8 @@
         app:layout_constraintTop_toBottomOf="@+id/userMajorTextView" />
 
     <ListView
-        android:layout_width="363dp"
+        android:id="@+id/SportsListView"
+        android:layout_width="match_parent"
         android:layout_height="187dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"

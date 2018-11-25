@@ -71,4 +71,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/welcomeToProfile"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/welcomeToProfile"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="@+id/welcomeCreateOffer"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeCreateOffer" />
+
+    <Button
+        android:id="@+id/welcomeHistory"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/welcomeHistory"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="@+id/welcomeCreateOffer"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeCreateOffer" />
+
 </android.support.constraint.ConstraintLayout>

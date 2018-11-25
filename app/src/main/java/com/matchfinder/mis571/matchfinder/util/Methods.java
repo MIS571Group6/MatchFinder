@@ -40,6 +40,35 @@ public class Methods {
     }
 
 
+    //Converts a cursor that contains numeric skill information to clear text skill information
+    public String[] getSkillStringArray(Cursor cursor, String column){
+        ArrayList<String> array = new ArrayList<String>();
+
+        String numericSkill;
+        String clearTextSkill = "null";
+
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+
+            numericSkill = cursor.getString(cursor.getColumnIndex(column));
+
+            if (numericSkill.equals("1")) {
+                clearTextSkill = "Beginner";
+            } else if (numericSkill.equals("2")) {
+                clearTextSkill = "Advanced";
+            } else if (numericSkill.equals("3")) {
+                clearTextSkill = "Semi-Professional";
+            } else if (numericSkill.equals("4")) {
+                clearTextSkill = "Professional";
+            }
+
+            array.add(clearTextSkill);
+            cursor.moveToNext();
+        }
+        return array.toArray(new String[array.size()]);
+    }
+
 
 
 }

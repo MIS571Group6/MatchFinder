@@ -44,6 +44,11 @@ public abstract class SQLCommand
     //query to find out all users that are participating at a specific match and their skills
     public static String QUERY_USERS = "Select UserMatch.UserID as 'UserID', UserInfo.UserNickName as 'NickName', Skill.Skillgroup as 'Skill' from UserMatch Inner Join UserInfo on UserMatch.UserID = UserInfo.UserID Inner Join Skill on UserMatch.UserID = Skill.UserID Inner Join Matches on UserMatch.MatchesID = Matches.MatchesID Where (Skill.SportID = Matches.SportID OR skill.sportID is Null) and UserMatch.MatchesID LIKE";
 
+    //query to find out if current user is participating in a certain match --> COULD BE ORDERED BY SKILLGROUP DESC
+    public static String QUERY_USERSKILLS = "Select Sport.SportName as 'SportName', Skill.SkillGroup as 'SkillGroup' from Sport left Join Skill on sport.SportID = Skill.SportID where Skill.UserID LIKE ";
+
+
+
 
     //PROFILES
     //query to find out Details for certain userID

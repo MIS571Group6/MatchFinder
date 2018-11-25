@@ -14,7 +14,7 @@
     <string name="welcomeShowOffers">Show all currently offered Matches</string>
     <string name="welcomeCreateOffer">Offer new match</string>
     <string name="welcomeName">Welcome,</string>
-
+    <string name="welcomeToProfile">Go to my Profile</string>
 
     //Offered Matches Strings
     <string name="offeredMatches">Matches that are currently being offered</string>
@@ -35,7 +35,7 @@
 
 
     //Profile Strings
-    <string name="profileTopThree">Top three sports</string>
+    <string name="profileTopThree">Skills</string>
 
 
     //SignUp Strings
@@ -53,11 +53,7 @@
     //Forgot Password Strings
     <string name="forgotPwTitle">Restore your password</string>
     <string name="forgotPwSubmit">Change Password</string>
-
-
-
-
-
+    <string name="welcomeHistory">Match History</string>
 
 
 </resources>

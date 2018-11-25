@@ -3,9 +3,11 @@ package com.matchfinder.mis571.matchfinder;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.matchfinder.mis571.matchfinder.adapters.WelcomeAdapter;
+import com.matchfinder.mis571.matchfinder.adapters.ProfileSkillsAdapter;
 import com.matchfinder.mis571.matchfinder.constant.SQLCommand;
 import com.matchfinder.mis571.matchfinder.util.DBOperator;
 import com.matchfinder.mis571.matchfinder.util.Methods;
@@ -60,7 +62,18 @@ public class Profile extends AppCompatActivity {
 
 
 
+        //Fill ListView with Information on skills of the user
 
+        ListView SportsListView = (ListView) findViewById(R.id.SportsListView);
+
+
+        Cursor cursor2 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERSKILLS + "'" + clickedUser + "'");
+
+        Methods skill= new Methods();
+
+        final ProfileSkillsAdapter profileSkillsAdapter = new ProfileSkillsAdapter(this, skill.getArray(cursor2, "SportName"), skill.getSkillStringArray(cursor2, "SkillGroup"));
+
+        SportsListView.setAdapter(profileSkillsAdapter);
 
 
     }

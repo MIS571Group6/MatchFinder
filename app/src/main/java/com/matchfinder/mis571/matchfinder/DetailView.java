@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,7 +26,7 @@ public class DetailView extends AppCompatActivity {
 
 
         //Getting MatchID from clicked Item in original ListView
-        String matchID;
+        final String matchID;
 
         if (savedInstanceState == null) {
 
@@ -97,7 +99,7 @@ public class DetailView extends AppCompatActivity {
         Methods UserID = new Methods();
 
         //Setting up the adapter that fills the ListView
-        final DetailViewAdapter DetailViewAdapter = new DetailViewAdapter(this, UserName.getArray(cursor, "NickName"), UserSkill.getArray(cursor, "Skill"), UserID.getArray(cursor, "UserID"));
+        final DetailViewAdapter DetailViewAdapter = new DetailViewAdapter(this, UserName.getArray(cursor, "NickName"), UserSkill.getSkillStringArray(cursor, "Skill"), UserID.getArray(cursor, "UserID"));
         detailListView.setAdapter(DetailViewAdapter);
 
             // Skill still must be translated in clear text
@@ -127,7 +129,34 @@ public class DetailView extends AppCompatActivity {
 
 
 
-        //CHANGING BUTTON "I WANT TO PARTICIPATE" TO "I NO LONGER WANT TO PARTICIPATE" WHEN ALREADY IN
+        //Signing up for or getting out of matches
+
+        final Button detailViewParticipate = (Button) findViewById(R.id.detailViewParticipate);
+
+        detailViewParticipate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                Cursor cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_OFFERDETAILS  + "'" + matchID + "'");
+
+                detailViewParticipate.setText("I want to participate");
+
+
+
+
+
+                detailViewParticipate.setText("I no longer want to participate");
+
+
+
+
+
+
+            }
+        });
+
 
 
 
