@@ -31,7 +31,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/createOfferNoofPeop"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newOfferSportsSpinner" />
@@ -110,7 +110,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/CreateNewOfferLocation"
-        android:inputType="time"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"

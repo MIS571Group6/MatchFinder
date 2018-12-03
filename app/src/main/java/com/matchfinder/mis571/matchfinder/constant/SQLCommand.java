@@ -68,5 +68,11 @@ public abstract class SQLCommand
     //NEW OFFER
     //query to find out all possible sports
     public static String QUERY_SPORTS = "select SportName as 'SportName' from Sport";
+    //insert new match
+    public static String INSERT_OFFER = "INSERT INTO Matches (SportID,MatchesPlayerCount,MatchesCreationDate,MatchesPlannedDate,MatchesPlannedPlace,MatchesDone) VALUES(?,?,?,?,?,?)";
+    //count number of matches
+    public static String QUERY_NoMatches = "select count(MatchesID) as 'count' from Matches";
+    //get sportid for specific sportname
+    public static String QUERY_SPORTID = "select sportID as 'SportID' from Sport where sportname LIKE";
 
 }

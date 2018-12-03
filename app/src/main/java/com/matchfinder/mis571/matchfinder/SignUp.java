@@ -81,7 +81,7 @@ public class SignUp extends AppCompatActivity {
 
                     if (uniqueNickNameChecker==0) {
                         //Inserting the user input to the database
-                        DBOperator.getInstance().getInstance().execSQL(SQLCommand.NEW_USER, getArgs());
+                        DBOperator.getInstance().execSQL(SQLCommand.NEW_USER, getArgs());
 
                         Toast.makeText(getBaseContext(), "Signed up successfully", Toast.LENGTH_SHORT).show();
 
