@@ -19,7 +19,9 @@ import com.matchfinder.mis571.matchfinder.constant.SQLCommand;
 import com.matchfinder.mis571.matchfinder.util.Methods;
 import com.matchfinder.mis571.matchfinder.util.DBOperator;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class DetailView extends AppCompatActivity {
@@ -28,6 +30,17 @@ public class DetailView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view_offer);
+
+
+
+        //copy database file
+        try{
+            DBOperator.copyDB(getBaseContext());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
 
 
         //Getting MatchID from clicked Item in original ListView
@@ -49,7 +62,7 @@ public class DetailView extends AppCompatActivity {
 
 
         //query for finding out detail information for the matchID
-        Cursor cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_OFFERDETAILS  + "'" + matchID + "'");
+        Cursor cursor1 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_OFFERDETAILS  + "'" + matchID + "'");
 
 
         Methods matchinfo = new Methods();
@@ -63,26 +76,23 @@ public class DetailView extends AppCompatActivity {
         TextView detailViewAvgSkill = (TextView) findViewById(R.id.detailViewAvgSkill);
 
         //setting first (and only) element of created string arrays as text of te textviews
-        detailViewSportName.setText(matchinfo.getArray(cursor,"sportname")[0]);
-        detailViewPlannedDate.setText("Planned Date: " + matchinfo.getArray(cursor,"PlannedDate")[0]);
-        detailViewPlannedTime.setText("Planned Time: " + matchinfo.getArray(cursor, "PlannedTime")[0]);
-        detailViewLocation.setText("Location: " + matchinfo.getArray(cursor,"Location")[0]);
-        detailViewCreationDate.setText("Offer created on: " + matchinfo.getArray(cursor, "CreationDate")[0]);
+        detailViewSportName.setText(matchinfo.getArray(cursor1,"sportname")[0]);
+        detailViewPlannedDate.setText("Planned Date: " + matchinfo.getArray(cursor1,"PlannedDate")[0]);
+        detailViewPlannedTime.setText("Planned Time: " + matchinfo.getArray(cursor1, "PlannedTime")[0]);
+        detailViewLocation.setText("Location: " + matchinfo.getArray(cursor1,"Location")[0]);
+        detailViewCreationDate.setText("Offer created on: " + matchinfo.getArray(cursor1, "CreationDate")[0]);
 
 
         //Finding out the average skill of all participating users and set the result as text of the textview
-        cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_AVGSKILL_1 + "'" + matchID + "'" + SQLCommand.QUERY_AVGSKILL_2);
-
-
-
+        Cursor cursor3 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_AVGSKILL_1 + "'" + matchID + "'" + SQLCommand.QUERY_AVGSKILL_2);
 
 
 
         //Because there is no mechanism that makes sure that every user has the corresponding skills, yet
-        if (matchinfo.getArray(cursor, "AverageSkill").length > 0) {
+        if (matchinfo.getArray(cursor3, "AverageSkill").length > 0) {
 
             //Finding out the clear text of the average skill
-            String averageSkillDescription = matchinfo.getSkillString(matchinfo.getArray(cursor, "AverageSkill")[0]);
+            String averageSkillDescription = matchinfo.getSkillString(matchinfo.getArray(cursor3, "AverageSkill")[0]);
 
             detailViewAvgSkill.setText("Average Skill: " + averageSkillDescription);
         } else{
@@ -92,27 +102,12 @@ public class DetailView extends AppCompatActivity {
 
 
 
+        updateListView(matchID);
+        updateBtnText(matchID);
 
 
 
-        //Finding out all Users and their skill for the inspected match
-        Cursor cursor2 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERS1 + "'"+ matchID +"'"+ SQLCommand.QUERY_USERS2 + "'" + matchID + "'");
-
-
-        //Filling ListView with information on all other participating users
         ListView detailListView = (ListView) findViewById(R.id.detailListView);
-
-        Methods userinfo = new Methods();
-
-
-        //Setting up the adapter that fills the ListView
-        final DetailViewAdapter DetailViewAdapter = new DetailViewAdapter(this, userinfo.getArray(cursor2, "UserNickName"), userinfo.getSkillStringArray(cursor2, "SkillGroup"), userinfo.getArray(cursor2, "UserID"));
-        detailListView.setAdapter(DetailViewAdapter);
-
-
-
-
-
 
 
         //Event when clicking a certain item of the listview. The corresponding Profile will be shown
@@ -120,11 +115,12 @@ public class DetailView extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
 
-                //Get and pass the matchesID of the clicked item
+                //Get and pass the UserID of the clicked item
                 Intent showDetail = new Intent(getApplicationContext(), Profile.class);
-                //Calling a method in detailAdapter class that returns the UsersID
-                String clickedUser = DetailViewAdapter.getUserID(i);
 
+                Methods userinfo2 = new Methods();
+                Cursor cursor5 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERS1 + "'" + matchID + "'" + SQLCommand.QUERY_USERS2 + "'" + matchID + "'");
+                String clickedUser = userinfo2.getArray(cursor5, "UserID")[i];
 
                 //Passing the info to the detailView page
                 showDetail.putExtra("com.matchfinder.mis571.matchfinder.USER_ID",clickedUser);
@@ -136,65 +132,116 @@ public class DetailView extends AppCompatActivity {
 
 
 
-
-
-
-
-        //Signing up for or getting out of matches
-
-        //Cursor containing information on all users that have signed up for the specific match
-        Cursor cursor3 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERS1 + "'"+ matchID +"'"+ SQLCommand.QUERY_USERS2 + "'" + matchID + "'");
-
-        Methods cursorCheck = new Methods();
-        Globals g = Globals.getInstance();
-        final Button detailViewParticipate = (Button) findViewById(R.id.detailViewParticipate);
-
-        //Check if current user is in the list of all users that have signed up for the specific match and change button text correspondingly
-        if (Arrays.asList(cursorCheck.getArray(cursor3, "UserID")).contains(g.getUserID().toString())){
-            detailViewParticipate.setText("I no longer want to participate");
-        }else {
-            detailViewParticipate.setText("I want to participate");
-        }
-
-
-
-
-        //Toast.makeText(getApplicationContext(),cursorCheck.getArray(cursor2,"UserID")[0] , Toast.LENGTH_SHORT).show();
-
-
-
-
-
-        //Event when clicking the button
-        detailViewParticipate.setOnClickListener(new View.OnClickListener() {
+        //Event when clicking the participating button
+        Button detailViewParticipate = (Button) findViewById(R.id.detailViewParticipate);
+        detailViewParticipate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
+            String inOrOut = updateBtnText(matchID);
+
+            if (inOrOut.equals("In")){
+
+                DBOperator.getInstance().execSQL(SQLCommand.DELETE_USERMATCH,getArgsdel(matchID));
+
+                Toast.makeText(getApplicationContext(),"You no longer are participating", Toast.LENGTH_SHORT).show();
 
 
+                } else if (inOrOut.equals("Out")){
+                DBOperator.getInstance().execSQL(SQLCommand.NEW_USERMATCH, getArgs(matchID));
+                Toast.makeText(getApplicationContext(),"You are participating", Toast.LENGTH_SHORT).show();
 
+            }else{
 
+                Toast.makeText(getApplicationContext(),"ERROR", Toast.LENGTH_SHORT).show();
+            }
 
-                //Method for updating the listView
-                updateListVIew(matchID);
+            updateListView(matchID);
+            updateBtnText(matchID);
 
             }
+
         });
+
 
     }
 
 
+
+
+
+
+    //Method for filling a string array for inserting info in UserMatchTable
+    private String[] getArgs(String matchID){
+        String args[]= new String[3];
+
+        Globals g = Globals.getInstance();
+
+        args[0]=matchID;
+        args[1]=g.getUserID().toString();
+        args[2]="'" + matchID + "-" + g.getUserID().toString() + "'";
+
+        return args;
+    }
+
+
+    //Method for filling a string array for deleting info in UserMatchTable
+    private String[] getArgsdel (String matchID){
+        String args[]= new String[1];
+
+        Globals g = Globals.getInstance();
+        args[0]="'" + matchID + "-" + g.getUserID().toString() + "'";
+
+        return args;
+    }
+
+
+
+    //Method for updating button text
+    String updateBtnText(String matchID){
+
+        Button detailViewParticipate = (Button) findViewById(R.id.detailViewParticipate);
+
+        Cursor cursor4 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERS1 + matchID + SQLCommand.QUERY_USERS2 + matchID);
+
+        Globals g = Globals.getInstance();
+        Methods userCheck = new Methods();
+        String inOrOut;
+
+        if (Arrays.asList(userCheck.getArray(cursor4, "UserID")).contains(g.getUserID().toString())){
+            detailViewParticipate.setText("I no longer want to participate");
+            inOrOut = "In";
+        } else if (!Arrays.asList(userCheck.getArray(cursor4, "UserID")).contains(g.getUserID().toString())){
+            detailViewParticipate.setText("I want to participate");
+            inOrOut ="Out";
+        } else{
+            detailViewParticipate.setText("ERROR");
+            inOrOut="Error";
+        }
+
+        return inOrOut;
+    }
 
 
 
 
     //Method for updating the ListView
-    private void updateListVIew(String matchID){
+    public void updateListView(String matchID) {
+    //Finding out all Users and their skill for the inspected match
+    Cursor cursor2 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERS1 + "'" + matchID + "'" + SQLCommand.QUERY_USERS2 + "'" + matchID + "'");
 
+    //Filling ListView with information on all other participating users
+    ListView detailListView = (ListView) findViewById(R.id.detailListView);
+
+    Methods userinfo = new Methods();
+
+
+    //Setting up the adapter that fills the ListView
+    DetailViewAdapter DetailViewAdapter = new DetailViewAdapter(this, userinfo.getArray(cursor2, "UserNickName"), userinfo.getSkillStringArray(cursor2, "SkillGroup"), userinfo.getArray(cursor2, "UserID"));
+    detailListView.setAdapter(DetailViewAdapter);
 
 
 
     }
-
 
 }

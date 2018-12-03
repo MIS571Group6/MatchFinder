@@ -13,7 +13,7 @@
         android:layout_marginLeft="11dp"
         android:layout_marginTop="11dp"
         android:text="Match"
-        android:textSize="28sp" />
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/matchIDTextView"
@@ -38,5 +38,5 @@
         android:layout_marginRight="37dp"
         android:layout_marginBottom="0dp"
         android:text="Time"
-        android:textSize="28sp" />
+        android:textSize="20dp" />
 </RelativeLayout>

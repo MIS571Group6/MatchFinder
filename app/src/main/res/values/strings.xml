@@ -10,7 +10,7 @@
     <string name="LogInForgotPW">I forgot my password</string>
 
     //Welcome Strings
-    <string name="welcomeMatchesToday">These are your matches of today</string>
+    <string name="welcomeMatches">These are your current matches</string>
     <string name="welcomeShowOffers">Show all currently offered Matches</string>
     <string name="welcomeCreateOffer">Offer new match</string>
     <string name="welcomeName">Welcome,</string>
@@ -24,6 +24,7 @@
     <string name="detailViewUsers">These users are participating</string>
     <string name="detailViewGetMeIn">I want to participate!</string>
     <string name="title_activity_create_offer">CreateOffer</string>
+    <string name="MatchDone">Match done</string>
 
 
     //Create New Offer Strings
@@ -32,10 +33,15 @@
     <string name="createNewOfferBtn">Create</string>
     <string name="createNewOfferDate">Date</string>
     <string name="CreateNewOfferTime">Time</string>
+    <string name="CreateNewOfferLocation">Location</string>
+
 
 
     //Profile Strings
     <string name="profileTopThree">Skills</string>
+    <string name="addSkill_btn">Add Skill</string>
+    <string name="editSkill_btn">Edit Skill</string>
+
 
 
     //SignUp Strings
@@ -53,6 +59,9 @@
     //Forgot Password Strings
     <string name="forgotPwTitle">Restore your password</string>
     <string name="forgotPwSubmit">Change Password</string>
+
+
+    //Match History Strings
     <string name="welcomeHistory">Match History</string>
 
 

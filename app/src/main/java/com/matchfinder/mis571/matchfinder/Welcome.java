@@ -32,19 +32,23 @@ public class Welcome extends AppCompatActivity {
         String UserNickName = g.getUserNickName();
         textViewWelcomeName.setText("Welcome, " + UserNickName);
 
+
+
+
+        //copy database file
+        try{
+            DBOperator.copyDB(getBaseContext());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
         welcomeListView = (ListView) findViewById(R.id.welcomeListView);
 
-        //create objects from Methods class
-        Methods sportName = new Methods();
-        Methods time = new Methods();
-        Methods matchesID = new Methods();
 
-        //fills a cursor with MatchesID, Sportname and Time of Match
-        Cursor  cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERMATCHES + "'" + g.getUserID() + "'");
-
-        //Give the welcomeAdapter (that fills information in the ListView) the information of the query (by using the method getArray from CursorToArrayClass)
-        final WelcomeAdapter welcomeAdapter = new WelcomeAdapter(this, sportName.getArray(cursor,"SportName"), matchesID.getArray(cursor, "Time"), time.getArray(cursor,"MatchesID" ));
-        welcomeListView.setAdapter(welcomeAdapter);
+        updateListView();
 
 
         //Event for clicking a certain item of the welcomeListView: The corresponding DetailView is being shown
@@ -54,8 +58,10 @@ public class Welcome extends AppCompatActivity {
 
                 //Get and pass the matchesID of the clicked item
                 Intent showDetail = new Intent(getApplicationContext(), DetailView.class);
-                //Calling a method in welcomeAdapter class that returns the MatchesID
-                String clickedMatch = welcomeAdapter.getMatchID(i);
+
+                Methods matchInfo = new Methods();
+                Cursor  cursor3 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERMATCHES + "'" + g.getUserID() + "'");
+                String clickedMatch = matchInfo.getArray(cursor3, "MatchesID")[i];
 
                 //Passing the info to the detailView page
                 showDetail.putExtra("com.matchfinder.mis571.matchfinder.MATCH_ID",clickedMatch);
@@ -113,12 +119,37 @@ public class Welcome extends AppCompatActivity {
 
 
 
+    }
 
 
+
+
+
+    private void updateListView(){
+        welcomeListView = (ListView) findViewById(R.id.welcomeListView);
+        //create objects from Methods class
+        Methods ListViewFiller = new Methods();
+
+        Globals g = Globals.getInstance();
+
+        //fills a cursor with MatchesID, Sportname and Time of Match
+        Cursor  cursor2 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERMATCHES + "'" + g.getUserID() + "'");
+
+        //Give the welcomeAdapter (that fills information in the ListView) the information of the query (by using the method getArray from CursorToArrayClass)
+        WelcomeAdapter welcomeAdapter = new WelcomeAdapter(this, ListViewFiller.getArray(cursor2,"SportName"), ListViewFiller.getArray(cursor2, "Time"), ListViewFiller.getArray(cursor2,"MatchesID" ));
+        welcomeListView.setAdapter(welcomeAdapter);
 
     }
 
 
 
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        updateListView();
+
+    }
 
 }

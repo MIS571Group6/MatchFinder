@@ -25,7 +25,7 @@ public abstract class SQLCommand
 
     //WELCOME
     //query to find all matches the current user is signed up for (and that are not done yet)
-    public static String QUERY_USERMATCHES = "SELECT Matches.MatchesID as 'MatchesID', Sport.SportName as 'SportName', strftime('%H:%M:%S', Matches.MatchesPlannedDate) as 'Time' \n" +
+    public static String QUERY_USERMATCHES = "SELECT Matches.MatchesID as 'MatchesID', Sport.SportName as 'SportName', strftime('%m/%d/%Y  %H:%M', Matches.MatchesPlannedDate) as 'Time' \n" +
             "FROM Matches \n" +
             "inner join sport on matches.sportid=sport.sportid \n" +
             "INNER JOIN USERMATCH on matches.matchesid = usermatch.matchesid \n" +
@@ -44,14 +44,11 @@ public abstract class SQLCommand
     public static String QUERY_USERS1 = "Select UserMatch.MatchesID as 'MatchesID', UserMatch.UserID as 'UserID', UserInfo.UserNickName as 'UserNickName', Skill.SkillGroup as 'SkillGroup' From UserMatch  Left Join UserInfo On UserMatch.UserID = UserInfo.UserID Left Join Skill On UserMatch.UserID = Skill.UserID Where Skill.SportID IN ((Select Matches.SportID from Matches Where Matches.MatchesID = ";
     public static String QUERY_USERS2=" ), NULL) AND UserMatch.MatchesID = ";
 
-
-
     //code to sign up for a match
-    public static String NEW_MATCH = "insert into UserMatch(MatchesID, UserID, MatchUserID) values(?,?,?)";
+    public static String NEW_USERMATCH = "insert into UserMatch(MatchesID, UserID, MatchUserID) values(?,?,?)";
 
     //code to sign out of a match
-
-
+    public static String DELETE_USERMATCH = "delete from UserMatch where MatchUserID LIKE ?";
 
 
     //PROFILES
@@ -67,5 +64,9 @@ public abstract class SQLCommand
     public static String QUERY_MATCHES = "select Matches.MatchesID as 'MatchesID', Sport.Sportname as 'SportName', Matches.MatchesPlannedDate as 'PlannedDate', Matches.MatchesPlayerCount as 'PlayerCount' from Matches Inner Join Sport on Matches.SportID = Sport.SportID Where Matches.MatchesDone LIKE 'N';";
 
 
+
+    //NEW OFFER
+    //query to find out all possible sports
+    public static String QUERY_SPORTS = "select SportName as 'SportName' from Sport";
 
 }

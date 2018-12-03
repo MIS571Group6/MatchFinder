@@ -25,25 +25,20 @@ public class OfferedMatches extends AppCompatActivity {
 
 
 
+
+        //copy database file
+        try{
+            DBOperator.copyDB(getBaseContext());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
         ListView offeredMatchesListView = (ListView) findViewById(R.id.offeredMatchesListView);
 
 
-
-        Cursor cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_MATCHES);
-
-
-        Methods sportName = new Methods();
-        Methods date = new Methods();
-        Methods playerCount = new Methods();
-        Methods matchesID = new Methods();
-
-
-        //Filling the ListView with information
-        final OfferedMatchesAdapter offeredMatchesAdapter = new OfferedMatchesAdapter(this, sportName.getArray(cursor,"SportName"), date.getArray(cursor, "PlannedDate"), matchesID.getArray(cursor,"MatchesID"), playerCount.getArray(cursor, "PlayerCount"));
-        offeredMatchesListView.setAdapter(offeredMatchesAdapter);
-
-
-
+        updateListView();
 
 
 
@@ -55,7 +50,12 @@ public class OfferedMatches extends AppCompatActivity {
                 //Get and pass the matchesID of the clicked item
                 Intent showDetail = new Intent(getApplicationContext(), DetailView.class);
                 //Calling a method in offeredMatchesAdapter class that returns the MatchesID
-                String clickedMatch = offeredMatchesAdapter.getMatchID(i);
+
+                Cursor cursor2 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_MATCHES);
+
+                Methods clickHandler = new Methods();
+
+                String clickedMatch = clickHandler.getArray(cursor2,"MatchesID")[i];
 
                 //Passing the info to the detailView page
                 showDetail.putExtra("com.matchfinder.mis571.matchfinder.MATCH_ID",clickedMatch);
@@ -81,6 +81,23 @@ public class OfferedMatches extends AppCompatActivity {
 
 
 
+
+    }
+
+
+
+
+
+    //Method for updating the ListView, depending on query chosen
+    private void updateListView(){
+        Cursor cursor1 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_MATCHES);
+        ListView offeredMatchesListView = (ListView) findViewById(R.id.offeredMatchesListView);
+
+        Methods ListViewHandler = new Methods();
+
+        //Filling the ListView with information
+        OfferedMatchesAdapter offeredMatchesAdapter = new OfferedMatchesAdapter(this, ListViewHandler.getArray(cursor1,"SportName"), ListViewHandler.getArray(cursor1, "PlannedDate"), ListViewHandler.getArray(cursor1,"MatchesID"), ListViewHandler.getArray(cursor1, "PlayerCount"));
+        offeredMatchesListView.setAdapter(offeredMatchesAdapter);
 
     }
 }

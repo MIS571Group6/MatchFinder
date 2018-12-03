@@ -38,12 +38,14 @@ public class LogIn extends AppCompatActivity {
                 //String UserNameCarrier holds the Nickname from user input
                 String UserNameCarrier = userNameEditText.getText().toString();
 
+
                 //copy database file
                 try{
                     DBOperator.copyDB(getBaseContext());
                 }catch(Exception e){
                     e.printStackTrace();
                 }
+
 
                 //find the corresponding password for the provided user name
                 Cursor cursor = DBOperator.getInstance().execQuery(SQLCommand.QUERY_NAME + "'" + UserNameCarrier + "'");

@@ -21,6 +21,18 @@ public class Profile extends AppCompatActivity {
 
 
 
+
+
+        //copy database file
+        try{
+            DBOperator.copyDB(getBaseContext());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
         //Getting UserID from clicked Item in original ListView
         String clickedUser;
 

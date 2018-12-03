@@ -46,6 +46,15 @@ public class SignUp extends AppCompatActivity {
                 getValues();
 
 
+                //copy database file
+                try{
+                    DBOperator.copyDB(getBaseContext());
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+
+
                 //Check if all fields are filled out, if passwords are identical and if username is unique
                 if (!(signUpFName.equals("")) && !(signUpLName.equals("")) && !(signUpNName.equals("")) && !(signUpMajor.equals("")) && !(signUpBDate.equals("")) && !(signUpFName.equals("")) && !(signUpPhone.equals("")) && !(signUpPwA.equals("")) && !(signUpPwB.equals("")) && !(signUpSecQuest.equals("")) && signUpPwA.equals(signUpPwB)){
 
@@ -90,6 +99,9 @@ public class SignUp extends AppCompatActivity {
                         }
                         //Save ID as global variable
                         g.setUserID(userIDCarrier);
+
+
+                        Toast.makeText(getApplicationContext(),g.getUserID().toString(), Toast.LENGTH_SHORT).show();
 
                         //Link to Welcome
                         Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
