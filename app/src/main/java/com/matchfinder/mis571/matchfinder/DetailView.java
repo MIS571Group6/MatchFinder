@@ -1,5 +1,7 @@
 package com.matchfinder.mis571.matchfinder;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.provider.Settings;
@@ -163,6 +165,43 @@ public class DetailView extends AppCompatActivity {
 
         });
 
+
+
+
+
+        //Event when clicking detailViewMatchDone button: Match will be updated as "Done"
+        Button detailViewMatchDone = (Button) findViewById(R.id.detailViewMatchDone);
+
+        detailViewMatchDone.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Dialog that warns user
+                AlertDialog alertDialog = new AlertDialog.Builder(DetailView.this).create();
+
+                // Setting Dialog Title
+                alertDialog.setTitle("Watch out!");
+                //Setting Dialog Message
+                alertDialog.setMessage("You are about to set this match to be done!");
+
+                //When pressing the ok button, the DB will be updated
+                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Update DB
+                        DBOperator.getInstance().execSQL(SQLCommand.MATCH_DONE + matchID);
+                        Toast.makeText(getApplicationContext(),"Match done", Toast.LENGTH_SHORT).show();
+
+                        //Link to Welcome Page
+                        Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
+                        startActivity(startIntent);
+                    }
+                });
+                alertDialog.show();
+
+
+            }
+        });
 
     }
 

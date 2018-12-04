@@ -63,6 +63,7 @@
 
     //Match History Strings
     <string name="welcomeHistory">Match History</string>
+    <string name="historyTitle">Your Match History</string>
 
 
 </resources>

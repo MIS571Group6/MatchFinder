@@ -118,6 +118,19 @@ public class Welcome extends AppCompatActivity {
 
 
 
+        //Event when clicking Button welcomeToMatchHistory
+        Button welcomeToMatchHistory = (Button) findViewById(R.id.welcomeToMatchHistory);
+        welcomeToMatchHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Linking to MatchHistory page
+                Intent showHistory = new Intent(getApplicationContext(), MatchHistory.class);
+                startActivity(showHistory);
+
+            }
+        });
+
 
     }
 

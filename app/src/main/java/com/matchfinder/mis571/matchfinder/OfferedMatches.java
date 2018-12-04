@@ -8,10 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.matchfinder.mis571.matchfinder.adapters.OfferedMatchesAdapter;
-import com.matchfinder.mis571.matchfinder.adapters.WelcomeAdapter;
 import com.matchfinder.mis571.matchfinder.constant.SQLCommand;
 import com.matchfinder.mis571.matchfinder.util.DBOperator;
 import com.matchfinder.mis571.matchfinder.util.Methods;
@@ -35,7 +33,7 @@ public class OfferedMatches extends AppCompatActivity {
 
 
 
-        ListView offeredMatchesListView = (ListView) findViewById(R.id.offeredMatchesListView);
+        ListView offeredMatchesListView = (ListView) findViewById(R.id.matchHistoryListView);
 
 
         updateListView();
@@ -91,7 +89,7 @@ public class OfferedMatches extends AppCompatActivity {
     //Method for updating the ListView, depending on query chosen
     private void updateListView(){
         Cursor cursor1 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_MATCHES);
-        ListView offeredMatchesListView = (ListView) findViewById(R.id.offeredMatchesListView);
+        ListView offeredMatchesListView = (ListView) findViewById(R.id.matchHistoryListView);
 
         Methods ListViewHandler = new Methods();
 

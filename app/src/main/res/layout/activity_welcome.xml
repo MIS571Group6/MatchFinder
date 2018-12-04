@@ -82,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@+id/welcomeCreateOffer" />
 
     <Button
-        android:id="@+id/welcomeHistory"
+        android:id="@+id/welcomeToMatchHistory"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"

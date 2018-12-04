@@ -50,6 +50,10 @@ public abstract class SQLCommand
     //code to sign out of a match
     public static String DELETE_USERMATCH = "delete from UserMatch where MatchUserID LIKE ?";
 
+    //code to update a match (done)
+    public static String MATCH_DONE = "Update Matches Set MatchesDone = 'Y' Where MatchesID = ";
+
+
 
     //PROFILES
     //query to find out Details for certain userID
@@ -75,4 +79,12 @@ public abstract class SQLCommand
     //get sportid for specific sportname
     public static String QUERY_SPORTID = "select sportID as 'SportID' from Sport where sportname LIKE";
 
+
+    //MATCH HISTORY
+    //query to find out all historic matches
+    public static String QUERY_HISTORIC_USERMATCHES = "SELECT Matches.MatchesID as 'MatchesID', Sport.SportName as 'SportName', strftime('%m/%d/%Y  %H:%M', Matches.MatchesPlannedDate) as 'Time' \n" +
+            "FROM Matches \n" +
+            "inner join sport on matches.sportid=sport.sportid \n" +
+            "INNER JOIN USERMATCH on matches.matchesid = usermatch.matchesid \n" +
+            "WHERE Matches.MatchesDone LIKE 'Y' and usermatch.userID =";
 }
