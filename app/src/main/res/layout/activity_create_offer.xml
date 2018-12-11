@@ -78,7 +78,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/createNewOfferDate"
-        android:inputType="date"
+        android:inputType="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newOfferNoOfPeopleTextView" />
@@ -94,7 +94,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/CreateNewOfferTime"
-        android:inputType="time"
+        android:inputType="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newOfferDateTextView" />

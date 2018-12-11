@@ -101,7 +101,11 @@ public class SignUp extends AppCompatActivity {
                         g.setUserID(userIDCarrier);
 
 
-                        Toast.makeText(getApplicationContext(),g.getUserID().toString(), Toast.LENGTH_SHORT).show();
+                        //Create skills for the new user (with default value = Beginner)
+                        createSkills(userIDCarrier.toString());
+
+
+                        //Toast.makeText(getApplicationContext(),g.getUserID().toString(), Toast.LENGTH_SHORT).show();
 
                         //Link to Welcome
                         Intent startIntent = new Intent(getApplicationContext(), Welcome.class);
@@ -177,6 +181,31 @@ private void getValues(){
 
         return args;
     }
+
+
+
+    //Method for creating skills for a new user
+
+    private void createSkills(String userID){
+
+
+        for (int i = 1; i <= 19; i ++){
+
+            String args[] = new String[5];
+            args[0] = userID;
+            args[1] = String.valueOf(i);
+            args[2] = "'" + userID + "-" + String.valueOf(i) + "'";
+            args[3] = "1"; //SkillGroup
+            args[4] = "1";
+            DBOperator.getInstance().execSQL(SQLCommand.INSERT_SKILLS, args);
+        }
+
+
+
+    }
+
+
+
 }
 
 

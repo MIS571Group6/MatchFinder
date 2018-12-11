@@ -6,7 +6,7 @@
     <string name="LogInBtn">Log In</string>
     <string name="logInEmail">User Name</string>
     <string name="logInPassword">Password</string>
-    <string name="LogInCreateAcc">Create new Account</string>
+    <string name="LogInCreateAcc">Sign Up</string>
     <string name="LogInForgotPW">I forgot my password</string>
 
     //Welcome Strings
@@ -65,5 +65,8 @@
     <string name="welcomeHistory">Match History</string>
     <string name="historyTitle">Your Match History</string>
 
+
+    //Skill Config Strings
+    <string name="SubmitSkills">Submit</string>
 
 </resources>

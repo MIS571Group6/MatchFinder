@@ -60,7 +60,7 @@ public class Welcome extends AppCompatActivity {
                 Intent showDetail = new Intent(getApplicationContext(), DetailView.class);
 
                 Methods matchInfo = new Methods();
-                Cursor  cursor3 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERMATCHES + "'" + g.getUserID() + "'");
+                Cursor  cursor3 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERMATCHES1 + "'" + g.getUserID() + "'" + SQLCommand.QUERY_USERMATCHES2);
                 String clickedMatch = matchInfo.getArray(cursor3, "MatchesID")[i];
 
                 //Passing the info to the detailView page
@@ -146,7 +146,7 @@ public class Welcome extends AppCompatActivity {
         Globals g = Globals.getInstance();
 
         //fills a cursor with MatchesID, Sportname and Time of Match
-        Cursor  cursor2 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERMATCHES + "'" + g.getUserID() + "'");
+        Cursor  cursor2 = DBOperator.getInstance().execQuery(SQLCommand.QUERY_USERMATCHES1 + "'" + g.getUserID() + "'" + SQLCommand.QUERY_USERMATCHES2);
 
         //Give the welcomeAdapter (that fills information in the ListView) the information of the query (by using the method getArray from CursorToArrayClass)
         WelcomeAdapter welcomeAdapter = new WelcomeAdapter(this, ListViewFiller.getArray(cursor2,"SportName"), ListViewFiller.getArray(cursor2, "Time"), ListViewFiller.getArray(cursor2,"MatchesID" ));

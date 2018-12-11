@@ -24,6 +24,13 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
 
+        //Clearing the global variables
+        Globals g = Globals.getInstance();
+        g.setUserNickName("");
+        g.setUserID(0);
+
+
+
         //Finding the LogIn button
         Button logInBtn = (Button) findViewById(R.id.logInBtn);
 
@@ -115,6 +122,23 @@ public class LogIn extends AppCompatActivity {
             }
         });
         }
+
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        //Clearing the global variables
+        Globals g = Globals.getInstance();
+        g.setUserNickName("");
+        g.setUserID(0);
+
+
     }
+
+}
+
+
 
 

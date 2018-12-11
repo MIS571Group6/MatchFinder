@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/profileSkillsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -80,34 +80,18 @@
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/profileSkillsTextView" />
 
-    <Button
-        android:id="@+id/addSkill_btn"
-        android:layout_width="150dp"
+    <TextView
+        android:id="@+id/profileUpdateskillsTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:text="@string/addSkill_btn"
-        app:layout_constraintEnd_toStartOf="@+id/editSkill_btn"
+        android:text="TextView"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SportsListView" />
-
-    <Button
-        android:id="@+id/editSkill_btn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/editSkill_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addSkill_btn"
         app:layout_constraintTop_toBottomOf="@+id/SportsListView" />
 
 </android.support.constraint.ConstraintLayout>

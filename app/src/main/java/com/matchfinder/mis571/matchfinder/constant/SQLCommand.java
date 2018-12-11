@@ -22,15 +22,12 @@ public abstract class SQLCommand
 
     public static String QUERY_NICKNAMECOUNT = "select Count(UserNickName) as 'Count' from UserInfo where UserNickName LIKE ";
 
+    public static String INSERT_SKILLS = "INSERT into Skill VALUES(?,?,?,?,?)";
 
     //WELCOME
     //query to find all matches the current user is signed up for (and that are not done yet)
-    public static String QUERY_USERMATCHES = "SELECT Matches.MatchesID as 'MatchesID', Sport.SportName as 'SportName', strftime('%m/%d/%Y  %H:%M', Matches.MatchesPlannedDate) as 'Time' \n" +
-            "FROM Matches \n" +
-            "inner join sport on matches.sportid=sport.sportid \n" +
-            "INNER JOIN USERMATCH on matches.matchesid = usermatch.matchesid \n" +
-            "WHERE Matches.MatchesDone LIKE 'N' and usermatch.userID =";
-
+    public static String QUERY_USERMATCHES1 = "SELECT Matches.MatchesID as 'MatchesID', Sport.SportName as 'SportName', strftime('%m/%d/%Y  %H:%M', Matches.MatchesPlannedDate) as 'Time' FROM Matches inner join sport on matches.sportid=sport.sportid INNER JOIN USERMATCH on matches.matchesid = usermatch.matchesid WHERE Matches.MatchesDone LIKE 'N' and usermatch.userID =";
+    public static String QUERY_USERMATCHES2= "Order by Time DESC";
 
     // DETAIL VIEW
     // query to find info on certain matches
@@ -59,14 +56,17 @@ public abstract class SQLCommand
     //query to find out Details for certain userID
     public static String QUERY_NICKNAME = "select UserNickname as 'NickName', UserMajor as 'Major', UserPhone as 'Phone', (strftime('%Y', 'now') - strftime('%Y', UserBirthDate)) - (strftime('%m-%d', 'now') < strftime('%m-%d', UserBirthDate)) as 'Age', UserGender as 'Gender' from UserInfo where UserID = ";
 
+    //query to update skill of a user
+    public static String UPDATE_SKILL = "Update Skill Set SkillGroup = ? Where UserID = ? AND SportID = ?";
+
+
     //query to find all skills of a user
-    public static String QUERY_USERSKILLS = "Select Sport.SportName as 'SportName', Skill.SkillGroup as 'SkillGroup' from Sport left Join Skill on sport.SportID = Skill.SportID where Skill.UserID LIKE ";
+    public static String QUERY_USERSKILLS = "Select Sport.SportName as 'SportName', Skill.SkillGroup as 'SkillGroup', sport.SportID as 'SportID' from Sport left Join Skill on sport.SportID = Skill.SportID where Skill.UserID LIKE ";
 
 
     //OFFERED MATCHES
     //query to find all offered matches that are not cancelled or already done
-    public static String QUERY_MATCHES = "select Matches.MatchesID as 'MatchesID', Sport.Sportname as 'SportName', Matches.MatchesPlannedDate as 'PlannedDate', Matches.MatchesPlayerCount as 'PlayerCount' from Matches Inner Join Sport on Matches.SportID = Sport.SportID Where Matches.MatchesDone LIKE 'N';";
-
+    public static String QUERY_MATCHES = "select Matches.MatchesID as 'MatchesID', Sport.Sportname as 'SportName', Matches.MatchesPlannedDate as 'PlannedDate', Matches.MatchesPlayerCount as 'PlayerCount' from Matches Inner Join Sport on Matches.SportID = Sport.SportID Where Matches.MatchesDone LIKE 'N' order by PlannedDate DESC";
 
 
     //NEW OFFER
